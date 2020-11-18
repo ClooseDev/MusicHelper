@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-type video struct {
+type Video struct {
 	BasicInfo
 	Items []Item
 }
@@ -26,7 +26,7 @@ type Snippet struct {
 	Id          string
 }
 
-func (v *video) GetTrackList() []string {
+func (v *Video) GetTrackList() []string {
 	res := make([]string, 0)
 	for _, item := range v.Items {
 		index := strings.Index(item.Snippet.Description, "Tracklist")
@@ -38,7 +38,7 @@ func (v *video) GetTrackList() []string {
 	return res
 }
 
-func (v *video) GetTitle() string {
+func (v *Video) GetTitle() string {
 	if len(v.Items) == 0 {
 		return ""
 	}

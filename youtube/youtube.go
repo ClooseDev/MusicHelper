@@ -17,8 +17,8 @@ func CreateYoutubeModel(token string) *youtubeModel {
 	return &youtubeModel{accessToken:token, endpoints:endpoints}
 }
 
-func (y *youtubeModel) GetVideoInfo(videoId string) video {
-	var newVideo video
+func (y *youtubeModel) GetVideoInfo(videoId string) Video {
+	var newVideo Video
 
 	var params = map[string]string{
 		"id": videoId,
@@ -26,7 +26,7 @@ func (y *youtubeModel) GetVideoInfo(videoId string) video {
 		"key":y.accessToken,
 	}
 
-	respBody, err := webClient.MakeGetRequest(endpoints["video"], params)
+	respBody, err := webClient.MakeGetRequest(endpoints["Video"], params, nil)
 	defer func() {
 		err := respBody.Close()
 		if err != nil {
@@ -34,7 +34,7 @@ func (y *youtubeModel) GetVideoInfo(videoId string) video {
 		}
 	}()
 	if err != nil {
-		log.Printf("can't get video info %v", err)
+		log.Printf("can't get Video info %v", err)
 		return newVideo
 	}
 
